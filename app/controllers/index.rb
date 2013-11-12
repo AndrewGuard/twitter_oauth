@@ -21,5 +21,4 @@ get '/auth' do
   # at this point in the code is where you'll need to create your user account and store the access token
 
   erb :index
-  
 end
