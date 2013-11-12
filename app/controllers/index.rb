@@ -28,11 +28,16 @@ get '/tweets' do
   erb :view_tweets
 end
 
-
 # ========= POST ===========================================
 
 post '/create_tweet' do 
-  Twitter.update(params[:tweet])
-  current_user << Twitter.user_timeline
+
+  tweeter = Twitter.configure do |config|
+    config.oauth_token = current_user.oauth_token
+    config.oauth_token_secret = current_user.oauth_secret
+  end
+
+  tweeter.update(params[:tweet])
+
   redirect to '/tweets'
 end
